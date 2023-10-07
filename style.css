@@ -4,11 +4,37 @@
   font-weight: lighter;
 }
 
+.header-container {
+  margin-left: 72px;
+}
+
 #bookList {
   display: flex;
   flex-wrap: wrap;
   gap: 20px; /* Adjust the gap between cards as needed */
   justify-content: center;
+  margin-top: 24px;
+}
+#filter {
+  margin-left: 24px;
+}
+
+#ratingFilterButtons {
+  padding-top: 16px;
+}
+
+.rating-filter-button {
+  margin-right: 8px;
+  background-color: rgba(1, 1, 108, 0.108);
+  border: 0.5px solid grey;
+  border-radius: 2px;
+  padding-left: 5px;
+  padding-right: 8px;
+}
+
+#searchInput {
+  margin-left: 16px;
+  width: 15%;
 }
 
 /* Style each book card */

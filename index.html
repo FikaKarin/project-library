@@ -1,30 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Project Library</title>
-</head>
+  </head>
 
-<body>
-    <h1>Project Library</h1>
-    <button id="sortAscendingButton">Sort A-Z</button>
-    <button id="sortDescendingButton">Sort Z-A</button>
-    <label for="genreFilter">Filter by Genre:</label>
-    <select id="genreFilter">
+  <body>
+    <div class="header-container">
+      <h1>Kakan's Library</h1>
+      <button id="sortAscendingButton">Sort A-Z</button>
+      <button id="sortDescendingButton">Sort Z-A</button>
+      <label id="filter" for="genreFilter">Filter by Genre:</label>
+      <select id="genreFilter">
         <option value="All">All Genres</option>
         <option value="Fiction">Fiction</option>
         <option value="Science Fiction">Science Fiction</option>
         <option value="Fantasy">Fantasy</option>
         <option value="Mystery">Mystery</option>
-    </select>
-    <div class="main-container">
-        <div id="bookList"></div>
+      </select>
+      <input type="text" id="searchInput" placeholder="Search..." />
+      <button id="searchButton">Search</button>
+      <div id="ratingFilterButtons">
+        <button
+          class="rating-filter-button"
+          data-min-rating="1"
+          data-max-rating="1.9"
+        >
+          Rating 1-1.9
+        </button>
+        <button
+          class="rating-filter-button"
+          data-min-rating="2"
+          data-max-rating="2.9"
+        >
+          Rating 2-2.9
+        </button>
+        <button
+          class="rating-filter-button"
+          data-min-rating="3"
+          data-max-rating="3.9"
+        >
+          Rating 3-3.9
+        </button>
+        <button
+          class="rating-filter-button"
+          data-min-rating="4"
+          data-max-rating="4.9"
+        >
+          Rating 4-4.9
+        </button>
+        <button
+          class="rating-filter-button"
+          data-min-rating="5"
+          data-max-rating="5"
+        >
+          Rating 5
+        </button>
+      </div>
+    </div>
+    <div class="books-container">
+      <div id="bookList"></div>
     </div>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

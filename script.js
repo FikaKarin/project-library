@@ -18,7 +18,7 @@ const books = [
     author: 'Harper Lee',
     year: 1960,
     genre: 'Fiction',
-    rating: 4.5,
+    rating: 5,
     description:
       'Set in the American South, this novel tackles issues of racism and injustice through the eyes of young Scout Finch.',
     image: './books-images/to-kill-a-mockingbird.jpg',
@@ -48,7 +48,7 @@ const books = [
     author: 'J.D. Salinger',
     year: 1951,
     genre: 'Fiction',
-    rating: 4,
+    rating: 1.6,
     description:
       'Narrated by the teenage Holden Caulfield, the novel explores themes of alienation and the search for authenticity.',
     image: './books-images/the-catcher-in-the-rye.jpeg',
@@ -58,7 +58,7 @@ const books = [
     author: 'J.R.R. Tolkien',
     year: 1937,
     genre: 'Fantasy',
-    rating: 4.6,
+    rating: 2.3,
     description:
       'A fantasy adventure novel that follows Bilbo Baggins on a quest to help a group of dwarves reclaim their homeland from a dragon.',
     image: './books-images/the-hobbit.jpg',
@@ -78,7 +78,7 @@ const books = [
     author: 'Herman Melville',
     year: 1851,
     genre: 'Adventure',
-    rating: 4.1,
+    rating: 2.6,
     description:
       'An epic tale of obsession, revenge, and the relentless pursuit of the great white whale, Moby Dick.',
     image: './books-images/moby-dick.jpg',
@@ -88,7 +88,7 @@ const books = [
     author: 'J.R.R. Tolkien',
     year: 1954,
     genre: 'Fantasy',
-    rating: 4.55,
+    rating: 4.5,
     description:
       'The first volume of the epic fantasy trilogy follows Frodo Baggins and the Fellowship on their quest to destroy the One Ring.',
     image: './books-images/the-lord-of-the-rings.jpg',
@@ -108,7 +108,7 @@ const books = [
     author: 'C.S. Lewis',
     year: 1950,
     genre: 'Fantasy',
-    rating: 4.15,
+    rating: 2.15,
     description:
       'The first book in the Chronicles of Narnia series, it follows the adventures of children who discover the magical land of Narnia.',
     image: './books-images/the-chronicles-of-narnia.jpg',
@@ -118,7 +118,7 @@ const books = [
     author: 'Dan Brown',
     year: 2003,
     genre: 'Mystery',
-    rating: 3.8,
+    rating: 1.9,
     description:
       'A gripping mystery thriller that follows Harvard symbologist Robert Langdon as he unravels the secrets of the Da Vinci Code.',
     image: './books-images/the-davinci-code.jpeg',
@@ -128,7 +128,7 @@ const books = [
     author: 'Paulo Coelho',
     year: 1988,
     genre: 'Fiction',
-    rating: 4.25,
+    rating: 3.5,
     description:
       'A philosophical novel that tells the story of Santiago, a shepherd boy, on his quest to discover his personal legend.',
     image: './books-images/the-alchemist.jpeg',
@@ -148,7 +148,7 @@ const books = [
     author: 'Stieg Larsson',
     year: 2005,
     genre: 'Mystery',
-    rating: 4.1,
+    rating: 3.1,
     description:
       'A gripping mystery novel featuring investigative journalist Mikael Blomkvist and the enigmatic hacker Lisbeth Salander.',
     image: './books-images/the-girl-with-the-dragon-tattoo.jpg',
@@ -158,7 +158,7 @@ const books = [
     author: 'Cormac McCarthy',
     year: 2006,
     genre: 'Dystopian',
-    rating: 4,
+    rating: 1.5,
     description:
       "Set in a post-apocalyptic world, it follows a father and son's harrowing journey to survive and find safety.",
     image: './books-images/the-road.jpg',
@@ -168,7 +168,7 @@ const books = [
     author: 'Douglas Adams',
     year: 1979,
     genre: 'Science Fiction',
-    rating: 4.35,
+    rating: 5,
     description:
       "A comedic science fiction series that follows the misadventures of Arthur Dent after Earth's destruction.",
     image: './books-images/the-hitchhikers-guide-to-the-galaxy.jpg',
@@ -334,6 +334,65 @@ genreFilterSelect.addEventListener('change', () => {
     // Filter books by the selected genre
     const filteredBooks = filterBooksByGenre(books, selectedGenre);
     displayBooks(filteredBooks);
+  }
+});
+
+// Function to filter books by rating range and sort them by rating in descending order
+function filterAndSortBooksByRating(booksArray, minRating, maxRating) {
+  const filteredBooks = booksArray.filter(
+    (book) => book.rating >= minRating && book.rating <= maxRating
+  );
+  return filteredBooks.sort((a, b) => b.rating - a.rating); // Sort by rating in descending order
+}
+
+// Function to update and display filtered books by rating
+function updateAndDisplayFilteredBooks(minRating, maxRating) {
+  const filteredBooks = filterAndSortBooksByRating(books, minRating, maxRating);
+  displayBooks(filteredBooks);
+}
+
+// Add event listeners to the rating filter buttons
+const ratingButtons = document.querySelectorAll('.rating-filter-button');
+
+ratingButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const minRating = parseFloat(button.dataset.minRating);
+    const maxRating = parseFloat(button.dataset.maxRating);
+    updateAndDisplayFilteredBooks(minRating, maxRating);
+  });
+});
+
+// Function to filter books by search keyword
+function searchBooksByKeyword(booksArray, keyword) {
+  const lowerCaseKeyword = keyword.toLowerCase();
+  return booksArray.filter((book) => {
+    // Check if the keyword is found in book title, author, year, or genre
+    return (
+      book.title.toLowerCase().includes(lowerCaseKeyword) ||
+      book.author.toLowerCase().includes(lowerCaseKeyword) ||
+      book.year.toString().includes(lowerCaseKeyword) ||
+      book.genre.toLowerCase().includes(lowerCaseKeyword)
+    );
+  });
+}
+
+// Function to update and display books based on search keyword
+function updateAndDisplaySearchedBooks() {
+  const searchInput = document.getElementById('searchInput');
+  const keyword = searchInput.value.trim().toLowerCase();
+  const searchedBooks = searchBooksByKeyword(books, keyword);
+  displayBooks(searchedBooks);
+}
+
+// Add event listener to the search button
+const searchButton = document.getElementById('searchButton');
+searchButton.addEventListener('click', updateAndDisplaySearchedBooks);
+
+// Add event listener to handle pressing Enter key in the search input
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    updateAndDisplaySearchedBooks();
   }
 });
 
